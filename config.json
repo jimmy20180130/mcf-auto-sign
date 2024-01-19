@@ -1,0 +1,25 @@
+{
+    "host": "jp.mcfallout.net",
+    "port": "25565",
+    "username": "username",
+    "password": "password",
+    "auth": "microsoft",
+    "version": "1.20.1",
+    "warps": {
+        "LuYao_": "LuYao_",
+        "zRU5H": "Rush_Bot",
+        "ddddo_4": "ddo_2j4",
+        "oinla02": "oinla02",
+        "GPT___": "GPT___",
+        "MTLONY": "MTLONY",
+        "Allinman": "Allinman",
+        "BIANBot": "BIANBot",
+        "Lori0128": "Lori0128",
+        "PChome24": "PChome24",
+        "TangYuan_bot": "TangYuan_bot",
+        "1Teemo1_50": "stefan053",
+        "mouse_bot": "mouse_bot",
+        "lsl_monkey": "lsl_monkey",
+        "SerendipitousBet": "SerendipitousBet"
+    }    
+}
