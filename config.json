@@ -1,7 +1,7 @@
 {
     "host": "jp.mcfallout.net",
     "port": "25565",
-    "username": "username",
+    "username": "example@example.com",
     "auth": "microsoft",
     "version": "1.20.1",
     "warps": {
