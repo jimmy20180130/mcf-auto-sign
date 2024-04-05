@@ -20,10 +20,10 @@ async function sign(warp) {
 
         await new Promise(resolve => setTimeout(resolve, 5000));
 
-        if (warp == 'PChome24') {
-            bot.chat(`/m ${config.warps[warp]} 貨到付款`);
+        if (warp in config.words) {
+            bot.chat(`/m ${config.warps[warp]} ${config.words[warp]}`);
         } else {
-            bot.chat(`/m ${config.warps[warp]} 簽到`);
+            bot.chat(`/m ${config.warps[warp]} ${config.words.default}`);
         }
 
         const sign_in_success_pattern = /^(\[系統\] 您收到了 .*\(目前擁有 .*\))$/;
@@ -59,15 +59,15 @@ async function sign(warp) {
                     const matches = konjac_success_msg.match(regex);
                     if (matches != null) {
                         console.log(`資訊: 請完成防人機驗證\n說明: 請完成防人機驗證以繼續至下一個傳點簽到，十秒鐘後繼續下個傳點\n連結: ${matches[0]}`);
+                        await new Promise(resolve => setTimeout(resolve, 10000));
                     }
                 }
                 continue_list.shift();
-                await new Promise(resolve => setTimeout(resolve, 10000));
             } else if (ddddo_already_signed_pattern.test(msg)) {
                 console.log(`錯誤: 今日您已經簽到過了\nBot ID: ${config.warps[warp]}\n最後簽到時間: ${ddddo_already_signed_pattern.exec(msg)[2]}`);
                 continue_list.shift();
             } else if (konjac_already_signed_pattern.test(msg)) {
-                console.log(`錯誤: 今日您已經簽到過了\nBot ID: ${config.warps[warp]}\n您的身份組: ${konjac_already_signed_pattern.exec(msg)[2]}`);
+                console.log(`錯誤: 今日您已經簽到過了\nBot ID: ${config.warps[warp]}`);
                 continue_list.shift();
             } else if (konjac_wait_pattern.test(msg)) {
                 const regex = /https:\/\/dice\.patyhank\.net\S*/g;
