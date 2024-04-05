@@ -10,6 +10,8 @@ let botargs = {
     port: config.port,
     version: config.version,
     auth: config.auth,
+    keepAlive: true,
+    checkTimeoutInterval: 120 * 1000
 }
 
 async function sign(warp) {
@@ -79,7 +81,7 @@ async function sign(warp) {
                 continue_list.shift()
             } else if (system_pattern.test(msg)) {
                 console.log(`錯誤: 系統訊息\n訊息: ${msg}\n此傳點將會在所有簽到處理完後重新嘗試簽到`);
-            } else if (msg === '機器人沒回應或發生了意外的錯誤') {
+            } else if (msg === '機器人沒回應或發生了意外的錯誤' || msg === 'Timeout') {
                 console.log('錯誤: 機器人沒回應或發生意外的錯誤\n說明: 此傳點將會在所有簽到處理完後重新嘗試簽到')
             } else {
                 console.log(`錯誤: 今日您已經簽到過了\nBot ID: ${config.warps[warp]}\n訊息: ${other_already_signed_pattern.exec(msg)[2]}`)
@@ -136,6 +138,12 @@ async function connect() {
         console.log('錯誤: 發生不可預期的錯誤\n', err)
         run = false
     });
+
+    bot.on('kicked', (err) => {
+        console.log('錯誤: 已被伺服器踢出\n', err)
+        run = false
+    })
+
     bot.on('end', async () => {
         console.log('資訊: 已斷線，將於五秒鐘後重新連線，之前的進度不會受影響');
         await new Promise(resolve => setTimeout(resolve, 5000));
@@ -144,3 +152,21 @@ async function connect() {
 }
 
 connect();
+
+process.on("unhandledRejection", async (error) => {
+    console.log(error)
+    console.log('[ERROR] ' + error.message)
+    process.exit(1)
+});
+
+process.on("uncaughtException", async (error) => {
+    console.log(error)
+    console.log('[ERROR] ' + error.message)
+    process.exit(1)
+});
+
+process.on("uncaughtExceptionMonitor", async (error) => {
+    console.log(error)
+    console.log('[ERROR] ' + error.message)
+    process.exit(1)
+});
