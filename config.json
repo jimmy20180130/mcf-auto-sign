@@ -2,7 +2,6 @@
     "host": "jp.mcfallout.net",
     "port": "25565",
     "username": "username",
-    "password": "password",
     "auth": "microsoft",
     "version": "1.20.1",
     "warps": {
