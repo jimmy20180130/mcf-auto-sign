@@ -11,7 +11,11 @@ let botargs = {
     version: '1.20.1',
     auth: 'microsoft',
     keepAlive: true,
-    checkTimeoutInterval: 120 * 1000
+    checkTimeoutInterval: 120 * 1000,
+    onMsaCode: (code) => {
+        console.log('資訊: 您尚未登入您的 Minecraft 帳號，請打開連結登入')
+        console.log('資訊: http://microsoft.com/link?otc=' + code)
+    }
 }
 
 async function sign(warp) {
@@ -152,7 +156,7 @@ async function connect() {
         console.log('資訊: 已斷線，將於五秒鐘後重新連線，之前的進度不會受影響');
         await new Promise(resolve => setTimeout(resolve, 5000));
         connect();
-    });
+    });    
 }
 
 connect();
