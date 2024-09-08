@@ -14,7 +14,7 @@ let botargs = {
     checkTimeoutInterval: 120 * 1000,
     onMsaCode: (code) => {
         console.log('資訊: 您尚未登入您的 Minecraft 帳號，請打開連結登入')
-        console.log('資訊: ' + code.verification_uri + code.user_code)
+        console.log('資訊: ' + code.verification_uri + '/' + code.user_code)
     }
 }
 
